@@ -4,7 +4,7 @@ import React from "react";
 const page = async () => {
   let memeData = await fetch('https://api.imgflip.com/get_memes')
   let responce = await memeData.json()
-  console.log(responce.data);
+  console.log(responce.data.memes);
   interface data {
     url: string
     id: string
@@ -13,17 +13,17 @@ const page = async () => {
 
   return (
     <React.Fragment>
-      <div className="flex flex-wrap gap-5 items-center justify-center">
-        <div>{responce.length > 0 ? responce.data.map((item: data, index: number) => (
-          <Image key={index} src={item.url} width={300} height={300} alt='img' />
-        )) : <h1>loading...</h1>}</div>
+      <div>
+        <div className="flex flex-wrap gap-5 items-center justify-center">{responce.data.memes.map((item: data, index: number) => (
+          <Image key={index} src={item.url} width={200} height={200} alt='img' />
+        ))}</div>
       </div>
     </React.Fragment>
   );
 }
 export default page
 
-
+// https://api.imgflip.com/get_memes
 
 
 
