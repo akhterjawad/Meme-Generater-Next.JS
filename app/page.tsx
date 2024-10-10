@@ -29,17 +29,20 @@ const page = async () => {
                 height={200} // Adjust height based on box_count for variety
                 className="object-cover rounded-md"
               />
-              <Button variant="outlined" className="mt-auto">
-                <Link href={{
-                  pathname: "creatememe",
-                  query: {
-                    url: item.url,
-                    id: item.id
-                  }
-                }}>
-                  Generate Meme
-                </Link>
-              </Button>
+              <div className="mt-auto">
+
+                <Button variant="outlined" className="mt-3">
+                  <Link href={{
+                    pathname: "creatememe",
+                    query: {
+                      url: item.url,
+                      id: item.id
+                    }
+                  }}>
+                    Generate Meme
+                  </Link>
+                </Button>
+              </div>
             </div>
           ))}
         </div>

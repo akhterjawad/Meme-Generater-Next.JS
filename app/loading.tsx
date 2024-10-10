@@ -3,7 +3,8 @@ import React from 'react'
 const Loading = () => {
     return (
         <React.Fragment>
-            <div role="status">
+
+            <div role="status" className='flex items-center justify-center w-full h-screen'>
                 <svg
                     aria-hidden="true"
                     className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
