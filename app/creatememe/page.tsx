@@ -74,7 +74,6 @@ const CreateMeme = ({ searchParams }: { searchParams: { id: string; url: string 
                                 type="text"
                                 placeholder="Enter top text"
                                 inputRef={text1}
-
                             />
                             <TextField
                                 required
@@ -84,7 +83,6 @@ const CreateMeme = ({ searchParams }: { searchParams: { id: string; url: string 
                                 type="text"
                                 placeholder="Enter bottom text"
                                 inputRef={text2}
-
                             />
                         </Box>
 
