@@ -5,10 +5,12 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 const page = async () => {
+  // fetch data
   let memeData = await fetch('https://api.imgflip.com/get_memes');
   let response = await memeData.json();
   console.log(response.data.memes);
 
+  // interface for input data types
   interface Data {
     url: string;
     id: string;
@@ -18,15 +20,15 @@ const page = async () => {
 
   return (
     <React.Fragment>
-      <div className="container bg-blue-200 mx-auto p-4">
+      <div className="container bg-blue-300 mx-auto p-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {response.data.memes.map((item: Data, index: number) => (
+          {response.data.memes.filter((item: Data) => item.box_count === 2).map((item: Data) => (
             <div key={item.id} className="flex h-auto flex-col items-center bg-white shadow-md rounded-lg p-4">
               <Image
                 src={item.url}
                 alt={item.name}
-                width={200} // Adjust width based on box_count for variety
-                height={200} // Adjust height based on box_count for variety
+                width={200} 
+                height={200}
                 className="object-cover rounded-md"
               />
               <div className="mt-auto">

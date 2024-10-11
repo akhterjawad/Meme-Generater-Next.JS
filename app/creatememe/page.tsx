@@ -9,18 +9,24 @@ import React, { useRef, useState } from 'react';
 const CreateMeme = ({ searchParams }: { searchParams: { id: string; url: string } }) => {
     const [meme, setMeme] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
-    const text1 = useRef<HTMLInputElement>(null);
-    const text2 = useRef<HTMLInputElement>(null);
+
+    // useRef to get input data
+    const text1Value = useRef<HTMLInputElement>(null);
+    const text2Value = useRef<HTMLInputElement>(null);
 
     const createMeme = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if (text1Value.current?.value === '' || text2Value.current?.value === '') {
+            alert('please fill all inputs')
+            return
+        }
         setLoading(true);  // Start loading
 
         try {
             const data = await fetch(
-                `https://api.imgflip.com/caption_image?template_id=${searchParams.id}&username=mabdullah6600&password=asdfgfdsa123&text0=${text1.current?.value}&text1=${text2.current?.value}`,
+                `https://api.imgflip.com/caption_image?template_id=${searchParams.id}&username=mabdullah6600&password=asdfgfdsa123&text0=${text1Value.current?.value}&text1=${text2Value.current?.value}`,
                 {
-                    method: 'POST',
+                    method: 'POST',//HTTP request ka method specify karna ka lia
                 }
             );
             const response = await data.json();
@@ -35,7 +41,7 @@ const CreateMeme = ({ searchParams }: { searchParams: { id: string; url: string 
 
     return (
         <Container maxWidth="sm" sx={{
-            marginTop: 4
+            marginTop: 4,
         }}>
             <Paper elevation={3} sx={{
                 padding: 4,
@@ -52,44 +58,39 @@ const CreateMeme = ({ searchParams }: { searchParams: { id: string; url: string 
                 <Box sx={{
                     display: 'flex',
                     flexDirection: { xs: 'column', sm: 'row' },
-                    alignContent: 'center',
+                    alignItems: 'center',
                     justifyContent: 'center',
                     gap: { xs: 1, sm: 5 }
                 }}>
                     <Box sx={{}}>
                         <Image src={searchParams.url} width={300} height={300} alt="Meme Template" style={{ borderRadius: 10, margin: 'auto', border: 2 }} />
                     </Box>
-
                     <form onSubmit={createMeme}>
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, marginTop: 3 }}>
                             <TextField
                                 required
-                                id="text1"
-                                label="Top Text"
+                                id="text1Value"
+                                label="First Text"
                                 variant="outlined"
                                 type="text"
-                                placeholder="Enter top text"
-                                inputRef={text1}
+                                placeholder="Enter First text"
+                                inputRef={text1Value}
                             />
                             <TextField
                                 required
-                                id="text2"
-                                label="Bottom Text"
+                                id="text2Value"
+                                label="Second Text"
                                 variant="outlined"
                                 type="text"
-                                placeholder="Enter bottom text"
-                                inputRef={text2}
+                                placeholder="Enter Second text"
+                                inputRef={text2Value}
                             />
                         </Box>
-
-
-                        {/* <Stack spacing={2} direction="row" justifyContent="center" sx={{ marginTop:  }}> */}
-                        <div className='mt-auto border'>
+                        <Stack spacing={2} direction="row" justifyContent="center" sx={{ marginTop: 1 }}>
                             <Button type="submit" variant="contained" color="primary">
                                 Generate Meme
                             </Button>
-                        </div>
-                        {/* </Stack> */}
+                        </Stack>
                     </form>
                 </Box>
 
