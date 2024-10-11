@@ -61,11 +61,7 @@ const CreateMeme = ({ searchParams }: { searchParams: { id: string; url: string 
                     </Box>
 
                     <form onSubmit={createMeme}>
-                        <Box
-                            sx={{ '& > :not(style)': { m: 1, width: '100%' }, marginTop: 3 }}
-                            // noValidate
-                            autoComplete="off"
-                        >
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, marginTop: 3 }}>
                             <TextField
                                 required
                                 id="text1"
@@ -86,11 +82,14 @@ const CreateMeme = ({ searchParams }: { searchParams: { id: string; url: string 
                             />
                         </Box>
 
-                        <Stack spacing={2} direction="row" justifyContent="center" sx={{ marginTop: 3 }}>
+
+                        {/* <Stack spacing={2} direction="row" justifyContent="center" sx={{ marginTop:  }}> */}
+                        <div className='mt-auto border'>
                             <Button type="submit" variant="contained" color="primary">
                                 Generate Meme
                             </Button>
-                        </Stack>
+                        </div>
+                        {/* </Stack> */}
                     </form>
                 </Box>
 
