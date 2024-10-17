@@ -22,7 +22,7 @@ const page = async () => {
     <React.Fragment>
       <div className="container bg-blue-300 mx-auto p-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {response.data.memes.filter((item: Data) => item.box_count === 2).map((item: Data) => (
+          {response.data.memes.map((item: Data) => (
             <div key={item.id} className="flex h-auto flex-col items-center bg-white shadow-md rounded-lg p-4">
               <Image
                 src={item.url}
@@ -38,7 +38,8 @@ const page = async () => {
                     pathname: "creatememe",
                     query: {
                       url: item.url,
-                      id: item.id
+                      id: item.id,
+                      box: item.box_count,
                     }
                   }}>
                     Generate Meme
